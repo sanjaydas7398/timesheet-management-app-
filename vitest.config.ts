@@ -12,15 +12,21 @@ export default defineConfig({
       provider: 'istanbul',
       reporter: ['text', 'json', 'html', 'lcov'],
       include: [
+        'src/components/ui/**/*.{ts,tsx}',
+        'src/components/forms/**/*.{ts,tsx}',
         'src/data/timesheetStore.ts',
         'src/data/entryStore.ts',
         'src/data/mockUsers.ts',
         'src/data/mockTimesheets.ts',
         'src/data/mockEntries.ts',
+        'src/lib/utils/cn.ts',
       ],
       exclude: [
         '**/*.test.{ts,tsx}',
         '**/*.spec.{ts,tsx}',
+        '**/*.d.ts',
+        '**/node_modules/**',
+        '**/dist/**',
       ],
       thresholds: {
         statements: 80,

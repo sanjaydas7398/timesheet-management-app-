@@ -1,9 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  mockTimesheets,
-  getTimesheetById,
-  getTimesheetsByUserId,
-} from '@/data/mockTimesheets';
+import { mockTimesheets, getTimesheetById, getTimesheetsByUserId } from '@/data/mockTimesheets';
 
 describe('mockTimesheets', () => {
   it('should contain at least one timesheet', () => {
