@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { entryStore } from '@/data/entryStore';
 import { timesheetStore } from '@/data/timesheetStore';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
@@ -16,19 +17,24 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     // Simulate API delay
     await new Promise((resolve) => setTimeout(resolve, 300));
 
+    // Verify timesheet exists
     const timesheet = timesheetStore.getById(id);
-
     if (!timesheet) {
       return NextResponse.json({ error: 'Timesheet not found' }, { status: 404 });
     }
 
-    return NextResponse.json({ data: timesheet });
+    const entries = entryStore.getByTimesheetId(id);
+
+    return NextResponse.json({
+      data: entries,
+      total: entries.length,
+    });
   } catch (error) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     // Authentication check
     const session = await getServerSession(authOptions);
@@ -42,44 +48,22 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     // Simulate API delay
     await new Promise((resolve) => setTimeout(resolve, 300));
 
-    const updatedTimesheet = timesheetStore.update(id, body);
-
-    if (!updatedTimesheet) {
+    // Verify timesheet exists
+    const timesheet = timesheetStore.getById(id);
+    if (!timesheet) {
       return NextResponse.json({ error: 'Timesheet not found' }, { status: 404 });
     }
+
+    const newEntry = entryStore.create({
+      timesheetId: id,
+      ...body,
+      status: body.status || 'draft',
+    });
 
     return NextResponse.json({
-      data: updatedTimesheet,
-      message: 'Timesheet updated successfully',
+      data: newEntry,
+      message: 'Entry created successfully',
     });
-  } catch (error) {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
-}
-
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  try {
-    // Authentication check
-    const session = await getServerSession(authOptions);
-    if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const { id } = await params;
-
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 300));
-
-    const deleted = timesheetStore.delete(id);
-
-    if (!deleted) {
-      return NextResponse.json({ error: 'Timesheet not found' }, { status: 404 });
-    }
-
-    return NextResponse.json({ message: 'Timesheet deleted successfully' });
   } catch (error) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
