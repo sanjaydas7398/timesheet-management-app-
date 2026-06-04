@@ -2,8 +2,17 @@
 
 A modern, production-grade SaaS Timesheet Management Application.
 
-🔗 **Live Demo:** [Insert Live URL Here]
-🐙 **GitHub Repository:** [Insert GitHub Link Here]
+🔗 **Live Demo:** -> https://timesheet-management-app-six.vercel.app/login
+
+🐙 **GitHub Repository:** -> https://github.com/sanjaydas7398/timesheet-management-app-
+
+## 🔑 Test Credentials
+
+Use the following test credentials to log in:
+
+- **Email:** `admin@tentwenty.com` | **Password:** `admin123` -> (John Doe)
+- **Email:** `user@tentwenty.com` | **Password:** `user123` -> (Test User)
+- **Email:** `test@example.com` | **Password:** `test123` -> (Jane Smith)
 
 ## 🚀 Frameworks/Libraries Used
 
@@ -24,7 +33,7 @@ A modern, production-grade SaaS Timesheet Management Application.
 
 ```bash
 # 1. Clone repository
-git clone <your-repo-url>
+git clone https://github.com/sanjaydas7398/timesheet-management-app-.git
 cd tentwenty-timesheet
 
 # 2. Install dependencies
@@ -41,14 +50,6 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## 🔑 Test Credentials
-
-Use the following test credentials to log in:
-
-- **Email:** `admin@tentwenty.com` | **Password:** `admin123` -> (John Doe)
-- **Email:** `user@tentwenty.com` | **Password:** `user123` -> (Test User)
-- **Email:** `test@example.com` | **Password:** `test123` -> (Jane Smith)
 
 ## 🧪 Testing
 
@@ -80,4 +81,5 @@ npm run test:ui
    - All client-side data fetching happens through proper Next.js App Router internal API routes (`src/app/api/...`), ensuring server-side control and clean JSON responses.
 
 ## 📄 License
+
 Private - For Assessment Purpose Only
