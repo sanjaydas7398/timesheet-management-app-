@@ -3,19 +3,33 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Primary Colors */
+  --color-primary-100: #EFF6FF;
+  --color-primary-700: #1A56DB;
+  --color-primary-800: #1E429F;
+
+  /* Gray Colors */
+  --color-gray-400: #9CA3AF;
+  --color-gray-700: #374151;
+  --color-gray-900: #111928;
+
+  /* Orange Colors */
+  --color-orange-400: #FF8A4C;
+
+  /* Red Colors */
+  --color-red-600: #E02424;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Custom color extensions */
+  --color-primary-100: #EFF6FF;
+  --color-primary-700: #1A56DB;
+  --color-primary-800: #1E429F;
 }
 
 body {
@@ -26,4 +40,52 @@ body {
     system-ui,
     -apple-system,
     sans-serif;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar completely while keeping scroll functionality */
+body {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+body::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari and Opera */
+}
+
+/* Dropdown options cursor pointer */
+select option {
+  cursor: pointer !important;
+}
+
+/* Prevent horizontal scroll */
+html {
+  overflow-x: hidden;
+  width: 100%;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
 }

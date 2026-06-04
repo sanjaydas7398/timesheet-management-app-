@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { timesheetStore } from '@/data/timesheetStore';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { filterTimesheetsAdvanced } from '@/lib/utils/timesheet.utils';
 
 export async function GET(request: NextRequest) {
   try {
@@ -18,6 +19,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const userId = searchParams.get('userId');
     const status = searchParams.get('status');
+    const dateRange = searchParams.get('dateRange');
 
     let filteredTimesheets = timesheetStore.getAll();
 
@@ -25,15 +27,17 @@ export async function GET(request: NextRequest) {
       filteredTimesheets = timesheetStore.getByUserId(userId);
     }
 
-    if (status) {
-      filteredTimesheets = filteredTimesheets.filter((ts) => ts.status === status);
-    }
+    filteredTimesheets = filterTimesheetsAdvanced(
+      filteredTimesheets, 
+      (status as Parameters<typeof filterTimesheetsAdvanced>[1]) || undefined, 
+      dateRange || undefined
+    );
 
     return NextResponse.json({
       data: filteredTimesheets,
       total: filteredTimesheets.length,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
@@ -60,7 +64,7 @@ export async function POST(request: NextRequest) {
       data: newTimesheet,
       message: 'Timesheet created successfully',
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
