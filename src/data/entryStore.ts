@@ -1,23 +1,23 @@
-import type { MockTimesheetEntry } from './mockEntries';
+import type { TimesheetEntry } from '@/types/timesheet.types';
 import { mockTimesheetEntries } from './mockEntries';
 
 export class EntryStore {
-  private entries: MockTimesheetEntry[] = [...mockTimesheetEntries];
+  private entries: TimesheetEntry[] = [...mockTimesheetEntries];
 
-  getAll(): MockTimesheetEntry[] {
+  getAll(): TimesheetEntry[] {
     return [...this.entries];
   }
 
-  getById(id: string): MockTimesheetEntry | undefined {
+  getById(id: string): TimesheetEntry | undefined {
     return this.entries.find((entry) => entry.id === id);
   }
 
-  getByTimesheetId(timesheetId: string): MockTimesheetEntry[] {
+  getByTimesheetId(timesheetId: string): TimesheetEntry[] {
     return this.entries.filter((entry) => entry.timesheetId === timesheetId);
   }
 
-  create(data: Omit<MockTimesheetEntry, 'id'>): MockTimesheetEntry {
-    const newEntry: MockTimesheetEntry = {
+  create(data: Omit<TimesheetEntry, 'id'>): TimesheetEntry {
+    const newEntry: TimesheetEntry = {
       id: String(this.entries.length + 1),
       ...data,
     };
@@ -25,7 +25,7 @@ export class EntryStore {
     return newEntry;
   }
 
-  update(id: string, data: Partial<MockTimesheetEntry>): MockTimesheetEntry | null {
+  update(id: string, data: Partial<TimesheetEntry>): TimesheetEntry | null {
     const index = this.entries.findIndex((entry) => entry.id === id);
     if (index === -1) return null;
 

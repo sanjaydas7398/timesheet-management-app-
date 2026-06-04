@@ -1,98 +1,83 @@
 # Tentwenty Timesheet Management Application
 
-A modern, production-grade SaaS Timesheet Management Application built with Next.js, TypeScript, and TailwindCSS.
+A modern, production-grade SaaS Timesheet Management Application.
 
-## 🚀 Tech Stack
+🔗 **Live Demo:** [Insert Live URL Here]
+🐙 **GitHub Repository:** [Insert GitHub Link Here]
 
-- **Framework:** Next.js 16.2.7 (App Router)
+## 🚀 Frameworks/Libraries Used
+
+- **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript 5
 - **Styling:** TailwindCSS 4
 - **Authentication:** NextAuth.js 4
 - **Testing:** Vitest + React Testing Library
 - **Code Quality:** ESLint + Prettier
 - **Git Hooks:** Husky + lint-staged
-- **CI/CD:** GitHub Actions
 
 ## 📋 Prerequisites
 
 - Node.js 20.x or higher
-- npm or yarn or pnpm
-- Git
+- npm (or yarn/pnpm)
 
-## 🛠️ Installation
+## 🛠️ Setup Instructions
 
 ```bash
-# Clone repository
+# 1. Clone repository
 git clone <your-repo-url>
 cd tentwenty-timesheet
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Setup environment variables
+# 3. Setup environment variables
 cp .env.local.example .env.local
 
-# Initialize Husky
-npm run prepare
+# 4. Build the application
+npm run build
 
-# Start development
+# 5. Start development server
 npm run dev
 ```
 
-## 🎯 Available Scripts
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-| Script                  | Description                  |
-| ----------------------- | ---------------------------- |
-| `npm run dev`           | Start development server     |
-| `npm run build`         | Build production application |
-| `npm start`             | Start production server      |
-| `npm run lint`          | Run ESLint                   |
-| `npm run lint:fix`      | Run ESLint with auto-fix     |
-| `npm run format`        | Format with Prettier         |
-| `npm run format:check`  | Check formatting             |
-| `npm run test`          | Run tests                    |
-| `npm run test:watch`    | Run tests in watch mode      |
-| `npm run test:ui`       | Open Vitest UI               |
-| `npm run test:coverage` | Generate coverage report     |
+## 🔑 Test Credentials
 
-## 📁 Project Structure
+Use the following test credentials to log in:
 
-```
-tentwenty-timesheet/
-├── .github/workflows/        # CI/CD pipelines
-├── .husky/                   # Git hooks
-├── src/
-│   ├── app/                  # Next.js App Router
-│   ├── components/           # React components
-│   ├── config/               # Configuration
-│   ├── constants/            # Constants
-│   ├── hooks/                # Custom hooks
-│   ├── lib/                  # Utilities
-│   ├── providers/            # Context providers
-│   ├── services/             # API services
-│   ├── store/                # State management
-│   ├── tests/                # Test files
-│   └── types/                # TypeScript types
-├── vitest.config.ts          # Vitest configuration
-├── eslint.config.mjs         # ESLint configuration
-└── package.json
+- **Email:** `admin@tentwenty.com` | **Password:** `admin123` -> (John Doe)
+- **Email:** `user@tentwenty.com` | **Password:** `user123` -> (Test User)
+- **Email:** `test@example.com` | **Password:** `test123` -> (Jane Smith)
+
+## 🧪 Testing
+
+```bash
+# 1. Run all tests (once)
+npm run test
+
+# 2. Run tests in watch mode (auto-rerun on file changes)
+npm run test:watch
+
+# 3. Run tests with coverage report
+npm run test:coverage
+
+# 4. Open Vitest UI (visual test runner)
+npm run test:ui
 ```
 
-## 🔧 Configuration
+## 🧠 Assumptions & Notes
 
-- **Testing:** Vitest with 80% coverage threshold
-- **Linting:** ESLint + Prettier integration
-- **Git Hooks:** Pre-commit (lint + format), Pre-push (tests)
-- **CI/CD:** GitHub Actions for automated checks
-
-## 📝 Development Status
-
-🚧 **Work in Progress** - Initial project setup complete with production-grade folder structure and tooling configuration.
-
-## 👥 Team
-
-Developed for Tentwenty Frontend Assessment 2025
+1. **Mock Database / API Storage:**
+   - **Assumption:** Since no external database was required, the database layer is mocked using in-memory classes (`entryStore.ts` and `timesheetStore.ts`). These cleanly simulate CRUD operations and API delays, but state will reset upon server restart.
+2. **Next-Auth Usage:**
+   - **Assumption:** Authentication uses NextAuth with a mock `CredentialsProvider`. Validation is simulated via a mock user database. We assume the JWT strategy is preferred for stateless server-side validation on internal API routes.
+3. **Hardcoded Business Data:**
+   - Form dropdowns (Projects, Work Types) are extracted to `src/constants/timesheet.constants.ts`. We assume these are static for the scope of the assessment, though they are structured so they can easily be swapped for API endpoints later.
+4. **Tailwind as the Single Source of Truth:**
+   - All styling is handled purely by Tailwind utility classes to ensure a unified design system. We avoided inline `style={{...}}` blocks entirely to ensure responsive states (hover/focus/disabled) work cleanly across mobile and desktop devices.
+5. **API Routing:**
+   - All client-side data fetching happens through proper Next.js App Router internal API routes (`src/app/api/...`), ensuring server-side control and clean JSON responses.
 
 ## 📄 License
-
 Private - For Assessment Purpose Only

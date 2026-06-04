@@ -1,22 +1,4 @@
-interface Timesheet {
-  id: string;
-  weekNumber: number;
-  startDate: string;
-  endDate: string;
-  status: 'draft' | 'pending' | 'approved' | 'rejected';
-  totalHours: number;
-  userId: string;
-}
-
-interface TimesheetEntry {
-  id: string;
-  timesheetId: string;
-  date: string;
-  projectName: string;
-  taskDescription: string;
-  hours: number;
-  status: 'draft' | 'pending' | 'approved' | 'rejected';
-}
+import { Timesheet, TimesheetEntry } from '@/types/timesheet.types';
 
 interface ApiResponse<T> {
   data: T;

@@ -1,18 +1,4 @@
-interface LoginCredentials {
-  email: string;
-  password: string;
-}
-
-interface LoginResponse {
-  user: {
-    id: string;
-    email: string;
-    name: string;
-    role: string;
-  };
-  token: string;
-  message: string;
-}
+import { LoginCredentials, LoginResponse } from '@/types/auth.types';
 
 export const authService = {
   async login(credentials: LoginCredentials): Promise<LoginResponse> {
